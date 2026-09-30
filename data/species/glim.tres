@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Species" load_steps=3 format=3 uid="uid://cvialspglim"]
+
+[ext_resource type="Script" path="res://scripts/species.gd" id="1_script"]
+[ext_resource type="CanvasTexture" path="res://art/chars/glim.tres" id="2_sheet"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"glim"
+display_name = "Glim"
+calling = &"magic"
+sheet = ExtResource("2_sheet")
+cell = Vector2i(24, 24)
+speed = 70.0
+glow = Color(0.66, 0.55, 0.78, 1)
+glow_energy = 1.1

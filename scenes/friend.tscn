@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvialfriendscn"]
+
+[ext_resource type="Script" path="res://scripts/friend.gd" id="1_script"]
+[ext_resource type="Resource" path="res://data/species/glim.tres" id="2_species"]
+[ext_resource type="Shader" path="res://shaders/cel_light.gdshader" id="3_cel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cel"]
+shader = ExtResource("3_cel")
+
+[node name="Friend" type="Node2D" groups=["friend"]]
+script = ExtResource("1_script")
+species = ExtResource("2_species")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+hframes = 3
+vframes = 4
+offset = Vector2(0, -8)
+material = SubResource("ShaderMaterial_cel")

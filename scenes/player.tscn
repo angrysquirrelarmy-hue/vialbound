@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvialplayerscn"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_script"]
+[ext_resource type="CanvasTexture" path="res://art/chars/player.tres" id="2_sheet"]
+[ext_resource type="Texture2D" path="res://art/light_soft.png" id="3_light"]
+[ext_resource type="Shader" path="res://shaders/cel_light.gdshader" id="4_cel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cel"]
+shader = ExtResource("4_cel")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(9, 6)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_script")
+human_sheet = ExtResource("2_sheet")
+human_cell = Vector2i(16, 24)
+motion_mode = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_sheet")
+hframes = 3
+vframes = 4
+offset = Vector2(0, -8)
+material = SubResource("ShaderMaterial_cel")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="VialLight" type="PointLight2D" parent="."]
+position = Vector2(0, -6)
+color = Color(0.72, 0.96, 0.95, 1)
+energy = 0.55
+texture = ExtResource("3_light")
+texture_scale = 0.6
+
+[node name="Cam" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

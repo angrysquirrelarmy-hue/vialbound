@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvialmainscn"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/world.tscn" id="2_world"]
+[ext_resource type="Shader" path="res://shaders/post_palette.gdshader" id="3_post"]
+[ext_resource type="Texture2D" path="res://art/palette.png" id="4_palette"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_post"]
+shader = ExtResource("3_post")
+shader_parameter/palette = ExtResource("4_palette")
+shader_parameter/palette_size = 32
+shader_parameter/dither = 0.055
+shader_parameter/enabled = true
+shader_parameter/grade = Vector3(1, 1, 1)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_script")
+
+[node name="View" type="SubViewportContainer" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_post")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="Viewport" type="SubViewport" parent="View"]
+transparent_bg = false
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="World" parent="View/Viewport" instance=ExtResource("2_world")]
+
+[node name="HUD" type="CanvasLayer" parent="View/Viewport"]
+
+[node name="Readout" type="Label" parent="View/Viewport/HUD"]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 300.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.86, 0.9, 0.95, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.09, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 7
+text = "full pass · yourself"
